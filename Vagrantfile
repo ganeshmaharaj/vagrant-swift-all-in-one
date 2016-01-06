@@ -82,6 +82,11 @@ Vagrant.configure("2") do |global_config|
       end
 
       config.vm.box = vagrant_box
+      if Vagrant.has_plugin?("vagrant-proxyconf")
+        config.proxy.http = (ENV['HTTP_PROXY'])
+        config.proxy.https = (ENV['HTTPS_PROXY'])
+        config.proxy.no_proxy = (ENV['NO_PROXY'] || 'localhost,127.0.0.1')
+      end
       if vagrant_boxes.key? vagrant_box
         config.vm.box_url = vagrant_boxes[vagrant_box]
       end

@@ -1,0 +1,19 @@
+1,2c1,3
+< export VAGRANT_BOX=swift-all-in-one  # trusty, precise, etc.
+< export VAGRANT_HOSTNAME=saio
+---
+> #export VAGRANT_BOX=swift-all-in-one  # trusty, precise, etc.
+> export VAGRANT_BOX=ubuntu/trusty64  # trusty, precise, etc.
+> export VAGRANT_HOSTNAME=localhost
+23c24
+< export SWIFT_REPO=git://github.com/openstack/swift.git
+---
+> export SWIFT_REPO=https://www.github.com/openstack/swift.git
+25,27c26,28
+< export SWIFTCLIENT_REPO=git://github.com/openstack/python-swiftclient.git
+< export SWIFTBENCH_REPO=git://github.com/openstack/swift-bench.git
+< export SWIFTSPECS_REPO=git://github.com/openstack/swift-specs.git
+---
+> export SWIFTCLIENT_REPO=https://www.github.com/openstack/python-swiftclient.git
+> export SWIFTBENCH_REPO=https://www.github.com/openstack/swift-bench.git
+> export SWIFTSPECS_REPO=https://www.github.com/openstack/swift-specs.git
