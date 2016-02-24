@@ -1,19 +1,27 @@
-1,2c1,3
-< export VAGRANT_BOX=swift-all-in-one  # trusty, precise, etc.
-< export VAGRANT_HOSTNAME=saio
----
-> #export VAGRANT_BOX=swift-all-in-one  # trusty, precise, etc.
-> export VAGRANT_BOX=ubuntu/trusty64  # trusty, precise, etc.
-> export VAGRANT_HOSTNAME=localhost
-23c24
-< export SWIFT_REPO=git://github.com/openstack/swift.git
----
-> export SWIFT_REPO=https://www.github.com/openstack/swift.git
-25,27c26,28
-< export SWIFTCLIENT_REPO=git://github.com/openstack/python-swiftclient.git
-< export SWIFTBENCH_REPO=git://github.com/openstack/swift-bench.git
-< export SWIFTSPECS_REPO=git://github.com/openstack/swift-specs.git
----
-> export SWIFTCLIENT_REPO=https://www.github.com/openstack/python-swiftclient.git
-> export SWIFTBENCH_REPO=https://www.github.com/openstack/swift-bench.git
-> export SWIFTSPECS_REPO=https://www.github.com/openstack/swift-specs.git
+diff --git a/localrc-template b/localrc-template
+index 591b671..e7ae7ad 100644
+--- a/localrc-template
++++ b/localrc-template
+@@ -1,4 +1,5 @@
+-export VAGRANT_BOX=swift-all-in-one  # trusty, precise, etc.
++#export VAGRANT_BOX=swift-all-in-one  # trusty, precise, etc.
++export VAGRANT_BOX=ubuntu/trusty64  # trusty, precise, etc.
+ export VAGRANT_HOSTNAME=saio
+ export VAGRANT_CPUS=1
+ export VAGRANT_RAM=1024
+@@ -21,11 +22,11 @@ export SERVERS_PER_PORT=0  # 1 port per dev in ring; N obj-servers per port
+ export OBJECT_SYNC_METHOD=rsync  # or ssync
+ export POST_AS_COPY=true  # or false
+ export ENCRYPTION=false  # or true
+-export SWIFT_REPO=git://github.com/openstack/swift.git
++export SWIFT_REPO=https://www.github.com/openstack/swift.git
+ export SWIFT_REPO_BRANCH=master
+-export SWIFTCLIENT_REPO=git://github.com/openstack/python-swiftclient.git
+-export SWIFTBENCH_REPO=git://github.com/openstack/swift-bench.git
+-export SWIFTSPECS_REPO=git://github.com/openstack/swift-specs.git
++export SWIFTCLIENT_REPO=https://www.github.com/openstack/python-swiftclient.git
++export SWIFTBENCH_REPO=https://www.github.com/openstack/swift-bench.git
++export SWIFTSPECS_REPO=https://www.github.com/openstack/swift-specs.git
+ export EXTRA_KEY=  # additional pubkey for ~vagrant/.ssh/authorized_keys
+ export GUI=   # non-empty shows VirtualBox console window
+ export SOURCE_ROOT=/vagrant # clone git repositories at this location
