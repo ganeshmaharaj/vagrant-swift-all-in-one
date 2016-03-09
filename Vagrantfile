@@ -71,7 +71,8 @@ local_config = {
   "source_root" => (ENV['SOURCE_ROOT'] || '/vagrant'),
 }
 
-
+# Using random host port for forwarding.
+host_port = 9000
 Vagrant.configure("2") do |global_config|
   global_config.ssh.forward_agent = true
   hosts.each do |vm_name, ip|
@@ -94,7 +95,7 @@ Vagrant.configure("2") do |global_config|
       config.vm.provider :virtualbox do |vb, override|
         override.vm.hostname = hostname
         override.vm.network :private_network, ip: ip
-
+        override.vm.network :forwarded_port, guest: 8080, host: host_port+=1
         vb.name = "vagrant-#{hostname}-#{current_datetime}"
         vb.cpus = Integer(ENV['VAGRANT_CPUS'] || 1)
         vb.memory = Integer(ENV['VAGRANT_RAM'] || 1024)
