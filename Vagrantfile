@@ -86,7 +86,7 @@ Vagrant.configure("2") do |global_config|
       if Vagrant.has_plugin?("vagrant-proxyconf")
         config.proxy.http = (ENV['HTTP_PROXY'])
         config.proxy.https = (ENV['HTTPS_PROXY'])
-        config.proxy.no_proxy = (ENV['NO_PROXY'] || 'localhost,127.0.0.1')
+        config.proxy.no_proxy = ("ENV['NO_PROXY'],#{hostname}" || 'localhost,127.0.0.1,#{hostname}')
       end
       if vagrant_boxes.key? vagrant_box
         config.vm.box_url = vagrant_boxes[vagrant_box]
@@ -122,6 +122,7 @@ Vagrant.configure("2") do |global_config|
 
       config.vm.provision :chef_solo do |chef|
         chef.add_recipe "swift"
+        chef.add_recipe "host_file_edit"
         chef.json = local_config
       end
     end
