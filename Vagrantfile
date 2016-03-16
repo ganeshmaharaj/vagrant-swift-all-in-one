@@ -73,8 +73,12 @@ local_config = {
 
 # Using random host port for forwarding.
 host_port = 9000
+proxy_ip_list = ""
 Vagrant.configure("2") do |global_config|
   global_config.ssh.forward_agent = true
+  hosts.each do |vm_name, ip|
+    proxy_ip_list = ("#{proxy_ip_list},#{ip}")
+  end
   hosts.each do |vm_name, ip|
     global_config.vm.define vm_name do |config|
       hostname = vm_name
@@ -84,9 +88,9 @@ Vagrant.configure("2") do |global_config|
 
       config.vm.box = vagrant_box
       if Vagrant.has_plugin?("vagrant-proxyconf")
-        config.proxy.http = (ENV['HTTP_PROXY'])
-        config.proxy.https = (ENV['HTTPS_PROXY'])
-        config.proxy.no_proxy = ("ENV['NO_PROXY'],#{hostname}" || 'localhost,127.0.0.1,#{hostname}')
+        config.proxy.http = (ENV['http_proxy'])
+        config.proxy.https = (ENV['https_proxy'])
+        config.proxy.no_proxy = (ENV['no_proxy']+",#{hostname},#{proxy_ip_list}" || 'localhost,127.0.0.1,#{hostname},#{proxy_ip_list}')
       end
       if vagrant_boxes.key? vagrant_box
         config.vm.box_url = vagrant_boxes[vagrant_box]
